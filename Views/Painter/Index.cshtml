@@ -1,0 +1,79 @@
+﻿@model IEnumerable<PainterWebApplication.Models.Painter>
+
+@{
+    ViewData["Title"] = "Список художников";
+}
+
+    <h1>Список художников</h1>
+    <p>
+        <a asp-action="Create">Добавить хужожника</a>
+    </p>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Surname)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Cards)
+                </th>
+                <th>
+                    Total count
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var painter in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => painter.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => painter.Surname)
+                    </td>
+                    <td>
+                        @if (painter.Cards != null)
+                        {
+                            @foreach (var card in painter.Cards)
+                            {
+                                @card.SerialNumber;
+                            }
+                        }
+                    </td>
+                    <td>
+                        @if (painter.Cards != null)
+                        {
+                            @painter.Cards.Count();
+                        }
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@painter.Id">Изменить</a> |
+                        <a asp-action="Details" asp-route-id="@painter.Id">Детали</a> |
+                        <a asp-action="Remove" asp-route-id="@painter.Id">Удалить</a> |
+                    </td>
+                </tr>
+            }
+            <tr>
+                <td> <a href="~/Painter/Clear/">Отчистить список</a></td>
+            </tr>
+            <tr>
+                <td> <a href="~/Card/Index/">Перейти к списку карточек</a></td>
+            </tr>
+            <tr>
+                <td> <a href="~/Set/Index/">Перейти к списку колод</a></td>
+            </tr>
+
+        </tbody>
+    </table>
+
+
+            
+              
+                    
+                    
+            
+        
